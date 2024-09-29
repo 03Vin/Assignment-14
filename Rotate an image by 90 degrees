@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+
+void rotateImage(int** image, int n, int m) {
+    int** rotatedImage = new int*[m];
+    for (int i = 0; i < m; i++) {
+        rotatedImage[i] = new int[n];
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            rotatedImage[j][n - i - 1] = image[i][j];
+        }
+    }
+
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << rotatedImage[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    for (int i = 0; i < m; i++) {
+        delete[] rotatedImage[i];
+    }
+    delete[] rotatedImage;
+}
+
+int main() {
+    int n, m;
+    cout << "Enter the number of rows (n): ";
+    cin >> n;
+    cout << "Enter the number of columns (m): ";
+    cin >> m;
+
+    int** image = new int*[n];
+    for (int i = 0; i < n; i++) {
+        image[i] = new int[m];
+    }
+
+    cout << "Enter the image elements:" << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cin >> image[i][j];
+        }
+    }
+
+    cout << "Rotated image:" << endl;
+    rotateImage(image, n, m);
+
+    for (int i = 0; i < n; i++) {
+        delete[] image[i];
+    }
+    delete[] image;
+
+    return 0;
+}
